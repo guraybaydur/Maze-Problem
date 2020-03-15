@@ -171,6 +171,16 @@ Node *Agent::removeFromFringe()
 	else if (searchType == DFS)
 	{
 		/********************* FILL-IN FROM HERE *********************/
+		cout << "Inside DFS ..." << endl;
+		node = fringe.front();
+		cout << "node->depth is " << node->depth << endl;
+		cout << "node's state is " << ((MazeState*)node->getState())->agentPos  << endl;
+		//system("read");
+		fringe.erase(fringe.begin());
+		cout << "node is removed from fridge" << endl;
+		// Node *testNode = 0;	
+		// testNode = fringe.back();
+		// cout << "node->depth is " << node->depth << endl;
 		/********************* FILL-IN UNTIL HERE *********************/
 	}
 	else if (searchType == UCS)
