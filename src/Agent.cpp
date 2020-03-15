@@ -194,6 +194,7 @@ Node *Agent::removeFromFringe()
 		for (int i = 0; i < fringe.size(); i++)
 		{
 			cout << "fringe search...at index i: " << i << endl;
+			cout << "fringe[i]'s pathCost: " << fringe[i]->pathCost << endl;
 			if(cheapestCost < fringe[i]->pathCost)
 			{
 				cheapestCost = fringe[i]->pathCost;
@@ -201,6 +202,9 @@ Node *Agent::removeFromFringe()
 				cheapestIndex = i;
 			}
 		}
+		cout << "cheapestIndex is " << cheapestIndex <<endl;
+		cout << "cheapest pathCost: " << fringe[cheapestIndex]->pathCost << endl;
+		//system("read");
 		node = fringe.at(cheapestIndex);
 		cout << "node->depth is " << node->depth << endl;
 		cout << "node's state is " << ((MazeState*)node->getState())->agentPos  << endl;
