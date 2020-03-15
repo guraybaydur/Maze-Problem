@@ -186,6 +186,26 @@ Node *Agent::removeFromFringe()
 	else if (searchType == UCS)
 	{
 		/********************* FILL-IN FROM HERE *********************/
+		cout << "Inside UCS ..." << endl;
+		double cheapestCost = fringe[0]->pathCost;
+		cout << "after cheapest cost defintion ..." << endl;
+		int cheapestIndex = 0;
+		cout << "after cheapestIndex defintion ..." << endl;
+		for (int i = 0; i < fringe.size(); i++)
+		{
+			cout << "fringe search...at index i: " << i << endl;
+			if(cheapestCost < fringe[i]->pathCost)
+			{
+				cheapestCost = fringe[i]->pathCost;
+				node = fringe[i];
+				cheapestIndex = i;
+			}
+		}
+		node = fringe.at(cheapestIndex);
+		cout << "node->depth is " << node->depth << endl;
+		cout << "node's state is " << ((MazeState*)node->getState())->agentPos  << endl;
+		fringe.erase(fringe.begin()+cheapestIndex);
+		cout << "node is removed from fridge" << endl;
 		/********************* FILL-IN UNTIL HERE *********************/
 	}
 	else if (searchType == A_STAR)
