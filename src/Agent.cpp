@@ -235,6 +235,31 @@ Node *Agent::removeFromFringe()
 	else if (searchType == A_STAR)
 	{
 		/********************* FILL-IN FROM HERE *********************/
+		cout << "Inside A_STAR ..." << endl;
+		//system("read");
+		double cheapestCost = fringe[0]->pathCost + (int)problem->heuristicFunc(fringe[0]->getState());
+		cout << "after cheapest cost defintion ..." << endl;
+		int cheapestIndex = 0;
+		cout << "after cheapestIndex defintion ..." << endl;
+		for (int i = 1; i < fringe.size(); i++)
+		{
+			cout << "fringe search...at index i: " << i << endl;
+			cout << "fringe[i]'s pathCost: " << fringe[i]->pathCost << endl;
+			if(cheapestCost > fringe[i]->pathCost + (int)problem->heuristicFunc(fringe[i]->getState()))
+			{
+				cheapestCost = fringe[i]->pathCost + (int)problem->heuristicFunc(fringe[i]->getState());
+				node = fringe[i];
+				cheapestIndex = i;
+			}
+		}
+		cout << "cheapestIndex is " << cheapestIndex <<endl;
+		cout << "cheapest pathCost: " << fringe[cheapestIndex]->pathCost << endl;
+		//system("read");
+		node = fringe.at(cheapestIndex);
+		cout << "node->depth is " << node->depth << endl;
+		cout << "node's state is " << ((MazeState*)node->getState())->agentPos  << endl;
+		fringe.erase(fringe.begin()+cheapestIndex);
+		cout << "node is removed from fridge" << endl;
 		/********************* FILL-IN UNTIL HERE *********************/
 	}
 	return node;
@@ -399,6 +424,7 @@ void Node::expand(Problem *problem)
 		newNode->depth = this->depth++;
 		newNode->pathCost = this->pathCost +
 							problem->getStateActionCost(this->getState(), newNode->action);
+		
 		this->childNodes.push_back(newNode);
 		cout << "a child node is pushed to childNodes!" << endl;
 		cout << "the child node's state is: " << ((MazeState*)childNodes.back()->getState())->agentPos << endl; 

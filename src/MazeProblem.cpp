@@ -209,6 +209,13 @@ bool  MazeProblem::isGoalState (State *curState){
 double MazeProblem::heuristicFunc (State *state){
 		double cost=0;
 		/********************* FILL-IN FROM HERE *********************/
+		int curPosOfAgent = ((MazeState*)state)->agentPos;
+		int row,col;
+		getRowColFromPos(row,col,curPosOfAgent);
+		int goalRow,goalCol;
+		int goalPosition= foodPosList[0];
+		getRowColFromPos(goalRow,goalCol,goalPosition); 
+		cost = MANHATTAN(col,row,goalCol,goalRow);
 		/********************* FILL-IN UNTIL HERE *********************/
 
 		return cost;
