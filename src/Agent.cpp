@@ -140,11 +140,29 @@ void Agent::printPath(Node *curNode, int msec)
 void Agent::add2Fringe(Node *node)
 {
 	/********************* FILL-IN FROM HERE *********************/
-	//fringe.push_back(node);
-	fringe.insert(fringe.begin(),node);
 	cout << "Inside add2Fringe(Node *node) ... Checking node's state... State is: " << ((MazeState*)node->getState())->agentPos << endl;
-	
-	//system("read");
+	cout << "Checking if type is UCS and if in closed list..." << endl;
+	// if(searchType == UCS && isInClosedList(node))
+	// {
+	// 	for (int i = 0; i < closedList.size(); i++)
+	// 	{
+	// 		cout << "closedList[i]'s state is " << ((MazeState*)closedList[i]->getState())->agentPos << endl;
+	// 		if(((MazeState*)closedList[i]->getState())->agentPos == ((MazeState*)node->getState())->agentPos)
+	// 		{
+	// 			cout << "same node is found in closedList!!! the state is: " <<  ((MazeState*)closedList[i]->getState())->agentPos << endl;
+	// 			if(node->pathCost < closedList[i]->pathCost)
+	// 			{
+	// 				fringe.erase(fringe.begin()+i);
+	// 				fringe.insert(fringe.begin()+i,node);
+	// 			}
+	// 			return;
+	// 		}
+	// 	}
+	// }
+	// else
+	// {
+		fringe.insert(fringe.begin(),node);
+	//}
 	/********************* FILL-IN UNTIL HERE *********************/
 }
 
@@ -185,17 +203,19 @@ Node *Agent::removeFromFringe()
 	}
 	else if (searchType == UCS)
 	{
+
 		/********************* FILL-IN FROM HERE *********************/
 		cout << "Inside UCS ..." << endl;
+		//system("read");
 		double cheapestCost = fringe[0]->pathCost;
 		cout << "after cheapest cost defintion ..." << endl;
 		int cheapestIndex = 0;
 		cout << "after cheapestIndex defintion ..." << endl;
-		for (int i = 0; i < fringe.size(); i++)
+		for (int i = 1; i < fringe.size(); i++)
 		{
 			cout << "fringe search...at index i: " << i << endl;
 			cout << "fringe[i]'s pathCost: " << fringe[i]->pathCost << endl;
-			if(cheapestCost < fringe[i]->pathCost)
+			if(cheapestCost > fringe[i]->pathCost)
 			{
 				cheapestCost = fringe[i]->pathCost;
 				node = fringe[i];
